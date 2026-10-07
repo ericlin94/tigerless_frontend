@@ -22,8 +22,6 @@ npm run build-storybook
 
 Storybook runs at http://127.0.0.1:6006. Viewport options include the exact 375px mobile and 1440px desktop boards. The npm lockfile is included.
 
-With the app running, `npm run test:ui` uses Playwright against Microsoft Edge on Windows. Screenshots and reports are written to the ignored `test-results/` directory. On other platforms install Chromium with `npx playwright install chromium`; the script selects Chromium there. Set `PLAYWRIGHT_CHANNEL` to override the browser and `APP_URL` to test another port.
-
 ## Structure
 
 - `src/app/`: App Router entry points, styles, layout, and informational routes.
@@ -35,25 +33,6 @@ With the app running, `npm run test:ui` uses Playwright against Microsoft Edge o
 - `public/assets/`: Original Figma images and SVGs. Raster images use Next.js image optimization; SVGs retain their source geometry.
 - `scripts/`: Asset provenance/download tooling and browser checks.
 - `.storybook/`: Story discovery, shared styles, accessibility addon, and board viewports.
-
-Tailwind defines the design tokens and resets; named CSS rules express measured component layouts, breakpoints, and interaction states. Artwork has explicit slots; text uses normal flow and flexible grid tracks. React state is local to the interactive components; the page coordinates the consultation dialog. No global state library is needed.
-
-`src/app/globals.css` contains Tailwind/theme tokens, resets, base typography, shared accessibility utilities, the native dialog backdrop, and the global reduced-motion preference. Component styles, their breakpoints, and FAQ keyframes live in the owning CSS Modules. The information route has its own module alongside its page. Service panels and testimonial cards are separate components rather than functions embedded in the home page.
-
-CSS Modules supply scoped class names. `src/lib/component-class-names.ts` also retains the existing semantic class hooks so browser checks and callers' custom classes keep working. Cross-component selectors use `:global(...)` only inside a locally scoped parent, for example a plan's styling of a shared action button. Existing story titles/IDs stay the same; story discovery already searches subdirectories.
-
-## Design Sources
-
-Figma file: `8ZULrUulW0F8nOFrgg7WO3`.
-
-- Desktop home: `1:303`, 1440px wide.
-- Mobile home: `1:884`, 375px wide.
-- Additional mobile weight-loss/plans/BMI group: `1:1077`, 335px content width. Inserted between how-it-works and birth control, matching desktop section order.
-- Mobile menu: `1:1416`, 375px wide.
-
-Layer hierarchy, section-specific design context, typography, assets, and screenshots were read through the Figma connector. The application uses source assets, not flattened screenshots of the page.
-
-At 375px, 12px outer and 8px inner margins produce 335px content. Below 768px, sections stack. Navigation switches to the menu at 1000px before links collide. The intermediate desktop range uses smaller type and padding. Content remains centered beyond 1440px. Horizontal scrolling is confined to the feature carousel and decorative language/trust rows, without expanding the page.
 
 ## API Contracts
 
@@ -94,7 +73,6 @@ BMI accepts canonical centimeters/kilograms; imperial conversion occurs at the f
 | Carousel has consistent previous/next buttons with disabled boundaries.                                           | Corrects the source's missing mobile previous control and overlapping arrow layers.                                          |
 | Letter spacing is zero; sections grow when corrected content needs room.                                          | Maintains responsive readability without clipped source geometry.                                                            |
 
-The component-folder/CSS Module reorganization is structural: each substantial component now owns its source, stories, and responsive styles. The service panel and testimonial card were extracted from the home page, shared social buttons moved to `ui/`, route styles moved beside the information page, and imports/public exports were updated. Existing visual and interaction behavior is preserved. This organizational deviation is recorded at the user's request; it changes code ownership rather than the supplied design. The new standalone Story Card stories cover quote and portrait variants.
 
 ## Interaction States And Motion
 
@@ -108,10 +86,6 @@ The component-folder/CSS Module reorganization is structural: each substantial c
 | Trust strip             | Centered desktop, overflowing mobile/tablet, and scrolled-to-end. Visible horizontal scrollbar, touch swiping, keyboard arrows on focus, and a labeled region. |
 | Consultation dialog     | Closed, consultation, login, validation error, success preview, information. Native focus containment, Escape, labeled fields, and email validation.                |
 | Links / social controls | Hover, keyboard focus, pressed; icons have accessible names and tooltips.                                                                                           |
-
-Transitions are 180-200ms. Reduced-motion preferences disable animation and switch to immediate scrolling. Language labels are informational, not fake selection controls. Stateful library components have a story for each main state; service panels and the page also have stories.
-
-The BMI ring uses a 700ms arc/color transition (200ms opacity). Its existing category stories now show the corresponding ring colors and lengths; Full Ring Result covers the visual cap, Mobile Result covers the smaller ring, and Animated Calculation exercises all four categories and a lower result after a higher one.
 
 ## AI Use
 
