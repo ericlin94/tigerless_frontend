@@ -12,6 +12,7 @@ import { Navigation } from "./navigation";
 import { FaqList } from "./faq";
 import { BmiCalculator } from "./bmi-calculator";
 import { FeatureCarousel } from "./feature-carousel";
+import { TrustStrip } from "./trust-strip";
 import { ConsultationDialog, type DialogMode } from "./consultation-dialog";
 
 function Socials({
@@ -258,20 +259,7 @@ export function HomePage({ content }: { content: HomeContent }) {
           </div>
         </section>
         <div className="trust-strip-wrap">
-          <div className="trust-strip">
-            {[
-              ["006ab.svg", "50 States"],
-              ["afe69.svg", "Discreet Shipping"],
-              ["5215a.svg", "Cash-pay, No Insurance Needed"],
-              ["58777.svg", "24/7 AI Care Assistant"],
-              ["23471.svg", "US Board Certified MDs"],
-            ].map(([file, label]) => (
-              <span key={label}>
-                <img src={`/assets/${file}`} width="24" height="24" alt="" />
-                {label}
-              </span>
-            ))}
-          </div>
+          <TrustStrip />
         </div>
         <section className="how-section" id="how-it-works">
           <p className="eyebrow">How it works</p>

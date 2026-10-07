@@ -116,11 +116,11 @@ export function FeatureCarousel({
                 }
                 sizes={
                   item.presentation === "call"
-                    ? "1282px"
+                    ? "(max-width: 767px) 802px, 1043px"
                     : item.id === "treatment"
                       ? "1277px"
                       : item.presentation === "medication"
-                        ? "528px"
+                        ? "(max-width: 767px) calc(100vw - 72px), 350px"
                         : "(max-width: 767px) 335px, 382px"
                 }
                 loading="eager"

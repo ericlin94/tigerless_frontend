@@ -1,18 +1,77 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import Image from "next/image";
 import type { FormEvent } from "react";
 import type { BmiResult } from "@/lib/contracts";
 import { calculateBmi } from "@/lib/bmi";
 import { Action, ActionLink } from "./ui";
+
+function BmiRing({ result }: { result: BmiResult | null }) {
+  const categoryColors: Record<
+    BmiResult["category"],
+    { arc: string; track: string }
+  > = {
+    Underweight: { arc: "#3b82f6", track: "#dbeafe" },
+    "Healthy weight": { arc: "#1a8a79", track: "#cdece3" },
+    Overweight: { arc: "#f59e0b", track: "#fef3c7" },
+    "Obesity range": { arc: "#ef4444", track: "#fee2e2" },
+  };
+  // The ring uses a bounded visual scale, not a treatment eligibility score.
+  const progress = result
+    ? Math.min(100, Math.max(0, (result.value / 40) * 100))
+    : 0;
+  const segmentGap = 3;
+  const trackLength = result
+    ? Math.max(0, 100 - progress - segmentGap * 2)
+    : 100;
+  return (
+    <div className="bmi-ring">
+      <svg className="bmi-ring-chart" viewBox="0 0 100 100" aria-hidden="true">
+        <circle
+          className="bmi-ring-track"
+          cx="50"
+          cy="50"
+          r="47.5"
+          pathLength="100"
+          style={{
+            stroke: result ? categoryColors[result.category].track : "#cdece3",
+            strokeDasharray: `${trackLength} 100`,
+            strokeDashoffset: result ? -(progress + segmentGap) : 0,
+            opacity: trackLength > 0 ? 1 : 0,
+          }}
+        />
+        <circle
+          className="bmi-ring-fill"
+          cx="50"
+          cy="50"
+          r="47.5"
+          pathLength="100"
+          strokeDasharray="100"
+          style={{
+            strokeDashoffset: 100 - progress,
+            stroke: result ? categoryColors[result.category].arc : "#cdece3",
+            opacity: result ? 1 : 0,
+          }}
+        />
+      </svg>
+      <strong>{result?.value ?? "--"}</strong>
+      <span>Your BMI Score</span>
+    </div>
+  );
+}
+
 export function BmiCalculator({
   initialUnit = "imperial",
   initialResult = null,
+  initialSex = "female",
 }: {
   initialUnit?: "imperial" | "metric";
   initialResult?: BmiResult | null;
+  initialSex?: "male" | "female";
 }) {
+  const sexGroupName = useId();
   const [unit, setUnit] = useState(initialUnit);
+  const [sex, setSex] = useState(initialSex);
   const [height, setHeight] = useState("");
   const [inches, setInches] = useState("");
   const [weight, setWeight] = useState("");
@@ -67,10 +126,7 @@ export function BmiCalculator({
         <h3 id="bmi-title">Could a GLP-1 program be right for you?</h3>
         <p className="bmi-description">Enter your height and weight below</p>
         <div className="bmi-mobile-result" aria-live="polite">
-          <div className="bmi-ring">
-            <strong>{result?.value ?? "--"}</strong>
-            <span>Your BMI Score</span>
-          </div>
+          <BmiRing result={result} />
           <p className="bmi-category">
             {result?.category ?? "Enter your measurements"}
           </p>
@@ -168,6 +224,23 @@ export function BmiCalculator({
             </span>
           </label>
         </div>
+        <fieldset className="bmi-sex">
+          <legend>Sex</legend>
+          <div className="bmi-sex-options">
+            {(["male", "female"] as const).map((option) => (
+              <label className="bmi-sex-option" key={option}>
+                <input
+                  type="radio"
+                  name={sexGroupName}
+                  value={option}
+                  checked={sex === option}
+                  onChange={() => setSex(option)}
+                />
+                <span>{option === "male" ? "Male" : "Female"}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
         <div className="bmi-note">
           For adults. BMI is a screening measure, not a diagnosis.
         </div>
@@ -181,10 +254,7 @@ export function BmiCalculator({
         </Action>
       </form>
       <div className="bmi-result" aria-live="polite">
-        <div className="bmi-ring">
-          <strong>{result?.value ?? "--"}</strong>
-          <span>Your BMI Score</span>
-        </div>
+        <BmiRing result={result} />
         <p className="bmi-category">
           {result?.category ?? "Enter your measurements"}
         </p>

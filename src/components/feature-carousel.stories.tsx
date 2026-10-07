@@ -16,3 +16,11 @@ type Story = StoryObj<typeof meta>;
 export const Start: Story = {};
 export const Middle: Story = { args: { initialIndex: 1 } };
 export const End: Story = { args: { initialIndex: 3 } };
+export const ProviderSupportMobile: Story = {
+  args: { items: [homeContent.features[0]] },
+  globals: { viewport: { value: "mobile375", isRotated: false } },
+};
+export const MedicationMobile: Story = {
+  args: { items: [homeContent.features[2]] },
+  globals: { viewport: { value: "mobile375", isRotated: false } },
+};

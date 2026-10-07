@@ -111,6 +111,11 @@ try {
   await page.getByLabel("Height in feet", { exact: true }).fill("5");
   await page.getByLabel("Additional height in inches").fill("9");
   await page.getByLabel("Weight", { exact: true }).fill("154");
+  const male = page.getByRole("radio", { name: "Male", exact: true });
+  const female = page.getByRole("radio", { name: "Female", exact: true });
+  assert.equal(await female.isChecked(), true);
+  await male.check();
+  assert.equal(await female.isChecked(), false);
   await page
     .getByRole("button", { name: "Calculate BMI", exact: true })
     .click();
@@ -118,7 +123,15 @@ try {
     await page.locator(".bmi-mobile-result .bmi-ring strong").textContent(),
     "22.7",
   );
+  await female.check();
+  assert.equal(await male.isChecked(), false);
+  assert.equal(
+    await page.locator(".bmi-mobile-result .bmi-ring strong").textContent(),
+    "22.7",
+  );
+  await male.check();
   await page.getByRole("button", { name: "cm / kg", exact: true }).click();
+  assert.equal(await male.isChecked(), true);
   await page.getByLabel("Height in centimeters").fill("175");
   await page.getByLabel("Weight", { exact: true }).fill("70");
   await page
