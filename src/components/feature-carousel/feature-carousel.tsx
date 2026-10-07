@@ -32,8 +32,18 @@ export function FeatureCarousel({
     const el = track.current;
     const item = el?.children[initialIndex] as HTMLElement | undefined;
     if (el && item) el.scrollLeft = item.offsetLeft;
-    updatePosition();
-    const observer = new ResizeObserver(updatePosition);
+    function updateLayout() {
+      if (!el) return;
+      for (const card of el.children) {
+        (card as HTMLElement).style.setProperty(
+          "--feature-scale",
+          String(card.getBoundingClientRect().width / 382),
+        );
+      }
+      updatePosition();
+    }
+    updateLayout();
+    const observer = new ResizeObserver(updateLayout);
     if (el) observer.observe(el);
     return () => observer.disconnect();
   }, [initialIndex]);
@@ -105,80 +115,97 @@ export function FeatureCarousel({
             )}
             key={item.id}
           >
-            <div className={classNames("feature-artwork")}>
-              <Image
-                className={classNames("feature-image")}
-                src={item.image.src}
-                alt={item.image.alt}
-                width={
-                  item.presentation === "call"
-                    ? 1109
-                    : item.presentation === "medication"
-                      ? 628
-                      : 4096
-                }
-                height={
-                  item.presentation === "call"
-                    ? 832
-                    : item.presentation === "medication"
-                      ? 406
-                      : 2304
-                }
-                sizes={
-                  item.presentation === "call"
-                    ? "(max-width: 767px) 802px, 1043px"
-                    : item.id === "treatment"
-                      ? "1277px"
+            <div className={classNames("feature-composition")}>
+              <div className={classNames("feature-artwork")}>
+                <Image
+                  className={classNames("feature-image")}
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  width={
+                    item.presentation === "call"
+                      ? 1109
                       : item.presentation === "medication"
-                        ? "(max-width: 767px) calc(100vw - 72px), 350px"
-                        : "(max-width: 767px) 335px, 382px"
-                }
-                loading="eager"
-              />
-            </div>
-            <h3>{item.title}</h3>
-            {item.presentation === "call" && (
-              <div className={classNames("chat-preview")} aria-hidden="true">
-                <div className={classNames("chat-contact")}>
-                  <img src="/assets/728d1.svg" width={14} height={14} alt="" />
-                  <Image
-                    className={classNames("chat-avatar")}
-                    src="/assets/216ba.png"
-                    alt=""
-                    width={28}
-                    height={28}
-                    loading="eager"
-                  />
-                  <div>
-                    Dr. Helena Fox<small>Online</small>
+                        ? 628
+                        : 4096
+                  }
+                  height={
+                    item.presentation === "call"
+                      ? 832
+                      : item.presentation === "medication"
+                        ? 406
+                        : 2304
+                  }
+                  sizes={
+                    item.presentation === "call"
+                      ? "(max-width: 421px) calc(328vw - 131px), 1251px"
+                      : item.id === "treatment"
+                        ? "1277px"
+                        : item.presentation === "medication"
+                          ? "(max-width: 421px) calc(138vw - 55px), 528px"
+                          : "(max-width: 767px) 335px, 382px"
+                  }
+                  loading="eager"
+                />
+              </div>
+              <h3>{item.title}</h3>
+              {item.presentation === "call" && (
+                <div className={classNames("chat-preview")} aria-hidden="true">
+                  <div className={classNames("chat-contact")}>
+                    <img
+                      src="/assets/728d1.svg"
+                      width={14}
+                      height={14}
+                      alt=""
+                    />
+                    <Image
+                      className={classNames("chat-avatar")}
+                      src="/assets/216ba.png"
+                      alt=""
+                      width={28}
+                      height={28}
+                      loading="eager"
+                    />
+                    <div>
+                      Dr. Helena Fox<small>Online</small>
+                    </div>
+                    <img
+                      src="/assets/5688f.svg"
+                      width={14}
+                      height={14}
+                      alt=""
+                    />
+                    <img
+                      src="/assets/b4fd3.svg"
+                      width={14}
+                      height={14}
+                      alt=""
+                    />
                   </div>
-                  <img src="/assets/5688f.svg" width={14} height={14} alt="" />
-                  <img src="/assets/b4fd3.svg" width={14} height={14} alt="" />
-                </div>
-                <div className={classNames("chat-today")}>
-                  <img src="/assets/82b61.svg" alt="" />
-                  Today
-                  <img src="/assets/82b61.svg" alt="" />
-                </div>
-                <div className={classNames("chat-message")}>
-                  <Image
-                    src="/assets/216ba.png"
-                    alt=""
-                    width={18}
-                    height={18}
-                  />
-                  <p>
-                    <small>Dr. Helena Fox</small>Hello! How are you feeling
-                    today?
-                    <time>10:00 AM</time>
+                  <div className={classNames("chat-today")}>
+                    <img src="/assets/82b61.svg" alt="" />
+                    Today
+                    <img src="/assets/82b61.svg" alt="" />
+                  </div>
+                  <div className={classNames("chat-message")}>
+                    <Image
+                      src="/assets/216ba.png"
+                      alt=""
+                      width={18}
+                      height={18}
+                    />
+                    <p>
+                      <small>Dr. Helena Fox</small>Hello! How are you feeling
+                      today?
+                      <time>10:00 AM</time>
+                    </p>
+                  </div>
+                  <p className={classNames("chat-reply")}>
+                    I&apos;m feeling fine, thank you! Just want to follow up on
+                    my recent tests.<time>10:00 AM</time>
                   </p>
                 </div>
-                <p className={classNames("chat-reply")}>
-                  I&apos;m feeling fine, thank you! Just want to follow up on my
-                  recent tests.<time>10:00 AM</time>
-                </p>
-              </div>
-            )}
+              )}
+            </div>
           </article>
         ))}
       </div>

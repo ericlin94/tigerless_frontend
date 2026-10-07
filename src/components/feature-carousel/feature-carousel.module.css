@@ -41,6 +41,18 @@
   position: relative;
   scroll-snap-align: start;
 }
+.feature-composition {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.feature-call .feature-composition,
+.feature-medication .feature-composition {
+  width: 382px;
+  height: 654px;
+  transform: scale(var(--feature-scale, 1));
+  transform-origin: top left;
+}
 .feature-card h3 {
   position: absolute;
   top: 0;
@@ -88,16 +100,24 @@
   object-fit: fill;
 }
 .feature-medication .feature-artwork {
-  inset: 180px 16px 32px;
+  inset: auto;
+  top: 241px;
+  left: 9px;
+  width: 406px;
+  height: 341px;
 }
 .feature-medication .feature-image {
-  object-fit: contain;
+  position: absolute;
+  left: -18.3%;
+  width: 129.92%;
+  max-width: none;
+  object-fit: fill;
 }
 .feature-call .feature-artwork {
   inset: auto;
-  top: 144px;
+  top: 128px;
   left: 50%;
-  width: min(76%, 250px);
+  width: 312px;
   aspect-ratio: 320 / 614.441;
   transform: translateX(-50%);
 }
@@ -217,26 +237,18 @@
     gap: 12px;
   }
   .feature-card {
-    flex-basis: 100%;
-    height: 510px;
+    flex-basis: min(100%, 382px);
+    height: auto;
+    aspect-ratio: 382 / 654;
   }
   .feature-card h3 {
     font-size: 24px;
   }
-  .feature-call .feature-artwork {
-    top: 120px;
-    width: min(70%, 190px);
-  }
-  .feature-medication .feature-artwork {
-    top: 160px;
-    bottom: 24px;
+  .feature-call h3,
+  .feature-medication h3 {
+    font-size: 32px;
   }
   .feature-treatment .feature-artwork {
     left: calc(50% - 644.5px);
-  }
-  .chat-preview {
-    right: max(16px, calc(50% - 180px));
-    top: 290px;
-    width: min(220px, 66%);
   }
 }
