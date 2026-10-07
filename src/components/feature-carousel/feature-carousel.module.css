@@ -1,0 +1,242 @@
+.feature-section {
+  padding: 80px 0 120px;
+}
+.feature-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.feature-heading h2 {
+  max-width: 580px;
+}
+.carousel-controls {
+  display: flex;
+  gap: 8px;
+}
+.carousel-controls :global(.icon-button) {
+  border: 2px solid var(--ink);
+  width: 44px;
+  height: 44px;
+}
+.feature-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  position: relative;
+  padding-bottom: 4px;
+}
+.feature-track::-webkit-scrollbar {
+  display: none;
+}
+.feature-card {
+  flex: 0 0 382px;
+  height: 654px;
+  border-radius: 16px;
+  background: white;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: start;
+}
+.feature-card h3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 32px 16px 24px 24px;
+  text-align: center;
+  font-size: 32px;
+  line-height: 1.16;
+  z-index: 1;
+}
+.feature-photo h3 {
+  color: white;
+  background: linear-gradient(#102b1cc0, transparent);
+}
+.feature-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.feature-artwork {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.feature-treatment .feature-artwork {
+  inset: auto;
+  top: -64px;
+  left: calc(50% - 645px);
+  width: 1270px;
+  height: 718px;
+}
+.feature-treatment .feature-artwork::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0000001a;
+}
+.feature-treatment .feature-image {
+  position: absolute;
+  top: 0.04%;
+  left: 5.43%;
+  width: 100.51%;
+  max-width: none;
+  object-fit: fill;
+}
+.feature-medication .feature-artwork {
+  inset: 180px 16px 32px;
+}
+.feature-medication .feature-image {
+  object-fit: contain;
+}
+.feature-call .feature-artwork {
+  inset: auto;
+  top: 144px;
+  left: 50%;
+  width: min(76%, 250px);
+  aspect-ratio: 320 / 614.441;
+  transform: translateX(-50%);
+}
+.feature-call .feature-image {
+  position: absolute;
+  top: -26.94%;
+  width: 400.8%;
+  height: 149.6%;
+  max-width: none;
+  left: -151.5%;
+  object-fit: fill;
+}
+.chat-preview {
+  position: absolute;
+  right: max(19px, calc(50% - 180px));
+  top: 412px;
+  width: 220px;
+  height: 181.867px;
+  padding: 9.387px;
+  border-radius: 14px;
+  background: #eaf7ee;
+  background-image:
+    url("/assets/f9c47.svg"), url("/assets/f9c47.svg"),
+    url("/assets/f9c47.svg"), url("/assets/f9c47.svg");
+  background-repeat: no-repeat;
+  background-position:
+    -235.84px -176px,
+    -32.267px -371.293px,
+    -235.84px -566px,
+    -32.267px -146.533px;
+  background-size: 504.533px 504.533px;
+  color: #292b2a;
+  box-shadow: 0 2px 4px #0003;
+  font-size: 8px;
+  line-height: 1.24;
+}
+.chat-contact {
+  display: flex;
+  gap: 7.04px;
+  align-items: center;
+}
+.chat-contact .chat-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.chat-contact > div {
+  flex: 1;
+}
+.chat-contact small {
+  display: block;
+  color: var(--accent);
+}
+.chat-today {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14.08px;
+  text-align: center;
+  margin-top: 4.693px;
+  padding: 4.693px 0;
+  line-height: 1;
+}
+.chat-message {
+  display: flex;
+  align-items: flex-end;
+  gap: 7.04px;
+  margin-top: 4.693px;
+}
+.chat-message > img {
+  width: 18.773px;
+  height: 18.773px;
+  border-radius: 50%;
+}
+.chat-preview p {
+  background: #ffffff99;
+  padding: 6px;
+  border-radius: 8px;
+  margin: 0;
+  flex: 1;
+}
+.chat-preview p small {
+  display: block;
+  margin-bottom: 2.347px;
+  font-size: 8px;
+  line-height: 1;
+}
+.chat-preview time {
+  display: block;
+  text-align: right;
+  margin-top: 2px;
+}
+.chat-preview .chat-reply {
+  margin-top: 7.04px;
+  margin-left: 25.813px;
+  background: var(--ink);
+  color: white;
+}
+@media (max-width: 767px) {
+  .feature-section {
+    padding: 0 0 56px;
+  }
+  .feature-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .feature-heading h2 {
+    font-size: 32px;
+  }
+  .carousel-controls {
+    align-self: flex-end;
+  }
+  .feature-track {
+    gap: 12px;
+  }
+  .feature-card {
+    flex-basis: 100%;
+    height: 510px;
+  }
+  .feature-card h3 {
+    font-size: 24px;
+  }
+  .feature-call .feature-artwork {
+    top: 120px;
+    width: min(70%, 190px);
+  }
+  .feature-medication .feature-artwork {
+    top: 160px;
+    bottom: 24px;
+  }
+  .feature-treatment .feature-artwork {
+    left: calc(50% - 644.5px);
+  }
+  .chat-preview {
+    right: max(16px, calc(50% - 180px));
+    top: 290px;
+    width: min(220px, 66%);
+  }
+}

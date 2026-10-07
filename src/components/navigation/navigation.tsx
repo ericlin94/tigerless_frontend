@@ -1,7 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { NavigationItem } from "@/lib/contracts";
-import { Action } from "./ui";
+import { Action } from "../ui/ui";
+import { createClassNames } from "@/lib/component-class-names";
+import uiStyles from "../ui/ui.module.css";
+import styles from "./navigation.module.css";
+const classNames = createClassNames({ ...uiStyles, ...styles });
+
 export function Navigation({
   items,
   onStart,
@@ -34,29 +39,29 @@ export function Navigation({
         alt="Apsu"
         width="287"
         height="32"
-        className="brand"
+        className={classNames("brand")}
       />
     </a>
   );
   return (
     <>
-      <header className="site-header">
+      <header className={classNames("site-header")}>
         {brand}
-        <nav aria-label="Main navigation" className="desktop-nav">
+        <nav aria-label="Main navigation" className={classNames("desktop-nav")}>
           {items.map((item) => (
             <a key={item.href} href={item.href}>
               {item.label}
             </a>
           ))}
         </nav>
-        <div className="desktop-actions">
+        <div className={classNames("desktop-actions")}>
           <Action onClick={onStart}>Get started</Action>
           <Action variant="outline" onClick={onLogin}>
             Login
           </Action>
         </div>
         <button
-          className="menu-trigger icon-button"
+          className={classNames("menu-trigger icon-button")}
           aria-label="Open menu"
           aria-haspopup="dialog"
           aria-expanded={open}
@@ -67,18 +72,18 @@ export function Navigation({
       </header>
       <dialog
         ref={dialog}
-        className="mobile-menu"
+        className={classNames("mobile-menu")}
         aria-label="Navigation menu"
         onCancel={() => setOpen(false)}
         onClick={(e) => {
           if (e.target === e.currentTarget) setOpen(false);
         }}
       >
-        <div className="menu-sheet">
-          <div className="menu-header">
+        <div className={classNames("menu-sheet")}>
+          <div className={classNames("menu-header")}>
             {brand}
             <button
-              className="icon-button"
+              className={classNames("icon-button")}
               aria-label="Close menu"
               onClick={() => setOpen(false)}
             >
@@ -96,7 +101,7 @@ export function Navigation({
               </a>
             ))}
           </nav>
-          <div className="menu-actions">
+          <div className={classNames("menu-actions")}>
             <Action
               onClick={() => {
                 setOpen(false);

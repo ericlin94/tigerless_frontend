@@ -8,7 +8,12 @@ import type {
   ConsultationPreview,
 } from "@/lib/contracts";
 import { previewConsultation } from "@/lib/content-repository";
-import { Action } from "./ui";
+import { Action } from "../ui/ui";
+import { createClassNames } from "@/lib/component-class-names";
+import uiStyles from "../ui/ui.module.css";
+import styles from "./consultation-dialog.module.css";
+const classNames = createClassNames({ ...uiStyles, ...styles });
+
 export type DialogMode =
   | { kind: "consultation"; serviceId: ServiceId }
   | { kind: "login" }
@@ -63,16 +68,16 @@ export function ConsultationDialog({
   return (
     <dialog
       ref={dialog}
-      className="consultation-dialog"
+      className={classNames("consultation-dialog")}
       aria-labelledby="dialog-title"
       onCancel={onClose}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="dialog-content">
+      <div className={classNames("dialog-content")}>
         <button
-          className="icon-button dialog-close"
+          className={classNames("icon-button dialog-close")}
           aria-label="Close dialog"
           onClick={onClose}
         >
@@ -90,7 +95,7 @@ export function ConsultationDialog({
             {mode.kind === "information" ? (
               <p>{mode.body}</p>
             ) : state === "success" ? (
-              <div className="dialog-success" role="status">
+              <div className={classNames("dialog-success")} role="status">
                 <CheckCircle2 size={40} />
                 <h3>
                   {mode.kind === "login"
@@ -153,7 +158,11 @@ export function ConsultationDialog({
                   />
                 </label>
                 {state === "error" && (
-                  <p className="form-error" id="email-error" role="alert">
+                  <p
+                    className={classNames("form-error")}
+                    id="email-error"
+                    role="alert"
+                  >
                     Enter a valid email address.
                   </p>
                 )}
@@ -162,7 +171,7 @@ export function ConsultationDialog({
                     ? "Continue"
                     : "Continue to consultation"}
                 </Action>
-                <small className="demo-note">
+                <small className={classNames("demo-note")}>
                   Preview only. No information is sent to a backend.
                 </small>
               </form>

@@ -1,0 +1,10 @@
+.information-page {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 24px;
+}
+.information-page h1 {
+  font-size: 48px;
+  line-height: 1.24;
+  margin: 32px 0;
+}

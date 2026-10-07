@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
 import type { Faq } from "@/lib/contracts";
+import { createClassNames } from "@/lib/component-class-names";
+import styles from "./faq.module.css";
+const classNames = createClassNames(styles);
+
 export function FaqItem({
   item,
   expanded,
@@ -11,7 +15,7 @@ export function FaqItem({
   onToggle: () => void;
 }) {
   return (
-    <article className={`faq-item ${expanded ? "expanded" : ""}`}>
+    <article className={classNames(`faq-item ${expanded ? "expanded" : ""}`)}>
       <h3>
         <button
           id={`question-${item.id}`}
@@ -20,7 +24,7 @@ export function FaqItem({
           onClick={onToggle}
         >
           <span>{item.question}</span>
-          <span className="faq-chevron">
+          <span className={classNames("faq-chevron")}>
             <img src="/assets/4a04e.svg" width="24" height="24" alt="" />
           </span>
         </button>
@@ -29,7 +33,7 @@ export function FaqItem({
         id={`answer-${item.id}`}
         role="region"
         aria-labelledby={`question-${item.id}`}
-        className="faq-answer"
+        className={classNames("faq-answer")}
         hidden={!expanded}
       >
         <p>{item.answer}</p>
@@ -46,7 +50,7 @@ export function FaqList({
 }) {
   const [openId, setOpenId] = useState<string | undefined>(initialOpenId);
   return (
-    <div className="faq-list">
+    <div className={classNames("faq-list")}>
       {items.map((item) => (
         <FaqItem
           key={item.id}

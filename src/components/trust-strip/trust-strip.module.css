@@ -1,0 +1,51 @@
+.trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 56px;
+  padding: 20px;
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #9ec6b3 var(--ink);
+  background: var(--ink);
+  color: white;
+  font-size: 18px;
+  line-height: 29px;
+}
+.trust-strip > span {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.trust-strip > span:first-child {
+  margin-inline-start: auto;
+}
+.trust-strip > span:last-child {
+  margin-inline-end: auto;
+}
+.trust-strip:focus-visible {
+  outline-offset: -3px;
+}
+.trust-strip::-webkit-scrollbar {
+  height: 8px;
+}
+.trust-strip::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+.trust-strip::-webkit-scrollbar-thumb {
+  background: #9ec6b3;
+  border-radius: 4px;
+}
+@media (max-width: 767px) {
+  .trust-strip {
+    justify-content: flex-start;
+    gap: 32px;
+    padding: 20px;
+    font-size: 14px;
+  }
+}

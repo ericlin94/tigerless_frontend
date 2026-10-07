@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ServicePanel } from "./home-page";
+import { ServicePanel } from "./service-panel";
 import { homeContent } from "@/lib/mock-content";
 const meta = {
   title: "Library/Service Panel",

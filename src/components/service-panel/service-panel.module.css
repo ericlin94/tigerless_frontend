@@ -1,0 +1,239 @@
+.service-panel {
+  position: relative;
+  min-height: 718px;
+  border-radius: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+.service-copy {
+  padding: 60px 32px 60px 64px;
+  z-index: 1;
+}
+.service-copy h2 {
+  color: #111;
+  margin-bottom: 32px;
+}
+.service-copy > p:not(:global(.eyebrow)) {
+  color: var(--body);
+}
+.service-copy :global(.eyebrow) {
+  margin-bottom: 16px;
+}
+.service-copy :global(.benefits) {
+  margin-top: 16px;
+}
+.service-action {
+  border-top: 1px solid #ffc0ff;
+  margin-top: 32px;
+  padding-top: 24px;
+}
+.service-action :global(.action) {
+  margin-top: 16px;
+}
+.portrait-slot {
+  align-self: stretch;
+  position: relative;
+  min-width: 0;
+}
+.service-portrait {
+  position: absolute;
+  width: 100%;
+  height: calc(100% + 34px);
+  top: -34px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+.weight-panel {
+  min-height: 619px;
+}
+.weight-panel .service-copy {
+  max-width: 585px;
+}
+.weight-panel h2 {
+  margin-bottom: 20px;
+}
+.weight-panel .service-action {
+  border: 0;
+  margin-top: 36px;
+  padding: 0;
+}
+.weight-panel .service-action :global(.action) {
+  margin: 0;
+}
+.weight-panel .service-portrait {
+  height: calc(100% + 64px);
+  top: -64px;
+}
+.service-reverse .service-copy {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 60px 32px;
+}
+.service-reverse .portrait-slot {
+  grid-column: 1;
+  grid-row: 1;
+}
+.health-widgets {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  position: absolute;
+  bottom: 72px;
+  left: 4%;
+  width: 90%;
+  z-index: 2;
+}
+.health-widgets > div {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px #0003;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.health-widgets > div:first-child {
+  flex: 2;
+}
+.health-widgets > div:last-child {
+  flex: 1;
+}
+.health-widgets strong {
+  font-size: 20px;
+  font-weight: 500;
+}
+.health-widgets hr {
+  margin: 8px 0 16px;
+  border: 0;
+  border-top: 1px dashed var(--border);
+}
+.health-widgets span {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--accent);
+}
+.health-widgets b {
+  font-size: 28px;
+  color: #111;
+  font-weight: 500;
+}
+.health-progress {
+  height: 6px;
+  border-radius: 6px;
+  margin: 32px 0 6px;
+  background: linear-gradient(to right, #3b82f6, #1a8a79, #f59e0b, #ef4444);
+}
+@media (max-width: 1250px) and (min-width: 768px) {
+  .service-copy {
+    padding: 40px 24px;
+  }
+  .service-copy h2 {
+    font-size: 40px;
+  }
+  .service-action :global(.action) {
+    font-size: 16px;
+    padding-left: 16px;
+  }
+  .health-widgets b {
+    font-size: 20px;
+  }
+  .health-widgets span {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 767px) {
+  .service-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 16px;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .service-copy {
+    padding: 12px;
+  }
+  .service-reverse .service-copy {
+    padding: 12px;
+  }
+  .service-copy h2 {
+    margin-bottom: 16px;
+  }
+  .service-copy :global(.eyebrow) {
+    display: none;
+  }
+  .service-copy :global(.benefits) {
+    margin-top: 16px;
+  }
+  .service-action {
+    margin-top: 24px;
+  }
+  .service-action :global(.action) {
+    width: 100%;
+    padding-left: 24px;
+    min-height: 48px;
+    justify-content: space-between;
+    font-size: 14px;
+    white-space: normal;
+    text-align: left;
+    gap: 4px;
+  }
+  .service-action :global(.action) img {
+    width: 32px;
+    height: 32px;
+  }
+  .portrait-slot {
+    height: 416px;
+    align-self: auto;
+    margin-top: 8px;
+  }
+  .service-portrait {
+    position: static;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+  .weight-panel .service-copy {
+    padding: 12px 12px 0;
+  }
+  .weight-panel .service-action {
+    margin-top: 24px;
+  }
+  .weight-panel .portrait-slot {
+    height: 355px;
+    margin-top: 8px;
+  }
+  .weight-panel .service-portrait {
+    height: 100%;
+  }
+  .service-reverse .portrait-slot {
+    height: 422px;
+    margin: 0 12px 22px;
+  }
+  .health-widgets {
+    bottom: 32px;
+    left: 0;
+    width: 100%;
+    gap: 8px;
+    flex-direction: row-reverse;
+  }
+  .health-widgets > div {
+    padding: 8px;
+    border-radius: 8px;
+  }
+  .health-widgets strong {
+    font-size: 14px;
+  }
+  .health-widgets b {
+    font-size: 18px;
+  }
+  .health-widgets span {
+    font-size: 8px;
+    gap: 4px;
+  }
+  .health-progress {
+    margin: 16px 0 6px;
+  }
+}

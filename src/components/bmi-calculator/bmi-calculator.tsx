@@ -4,7 +4,11 @@ import Image from "next/image";
 import type { FormEvent } from "react";
 import type { BmiResult } from "@/lib/contracts";
 import { calculateBmi } from "@/lib/bmi";
-import { Action, ActionLink } from "./ui";
+import { Action, ActionLink } from "../ui/ui";
+import { createClassNames } from "@/lib/component-class-names";
+import uiStyles from "../ui/ui.module.css";
+import styles from "./bmi-calculator.module.css";
+const classNames = createClassNames({ ...uiStyles, ...styles });
 
 function BmiRing({ result }: { result: BmiResult | null }) {
   const categoryColors: Record<
@@ -25,10 +29,14 @@ function BmiRing({ result }: { result: BmiResult | null }) {
     ? Math.max(0, 100 - progress - segmentGap * 2)
     : 100;
   return (
-    <div className="bmi-ring">
-      <svg className="bmi-ring-chart" viewBox="0 0 100 100" aria-hidden="true">
+    <div className={classNames("bmi-ring")}>
+      <svg
+        className={classNames("bmi-ring-chart")}
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+      >
         <circle
-          className="bmi-ring-track"
+          className={classNames("bmi-ring-track")}
           cx="50"
           cy="50"
           r="47.5"
@@ -41,7 +49,7 @@ function BmiRing({ result }: { result: BmiResult | null }) {
           }}
         />
         <circle
-          className="bmi-ring-fill"
+          className={classNames("bmi-ring-fill")}
           cx="50"
           cy="50"
           r="47.5"
@@ -108,9 +116,9 @@ export function BmiCalculator({
     setResult(next);
   }
   return (
-    <section className="bmi-section" aria-labelledby="bmi-title">
+    <section className={classNames("bmi-section")} aria-labelledby="bmi-title">
       <Image
-        className="bmi-background"
+        className={classNames("bmi-background")}
         src="/assets/8e0f8.png"
         alt=""
         width={4096}
@@ -118,21 +126,23 @@ export function BmiCalculator({
         sizes="(max-width: 767px) 335px, 1320px"
         loading="eager"
       />
-      <form className="bmi-form" onSubmit={submit} noValidate>
-        <div className="bmi-labels">
-          <span className="eyebrow">Check your eligibility</span>
+      <form className={classNames("bmi-form")} onSubmit={submit} noValidate>
+        <div className={classNames("bmi-labels")}>
+          <span className={classNames("eyebrow")}>Check your eligibility</span>
           <span>BMI</span>
         </div>
         <h3 id="bmi-title">Could a GLP-1 program be right for you?</h3>
-        <p className="bmi-description">Enter your height and weight below</p>
-        <div className="bmi-mobile-result" aria-live="polite">
+        <p className={classNames("bmi-description")}>
+          Enter your height and weight below
+        </p>
+        <div className={classNames("bmi-mobile-result")} aria-live="polite">
           <BmiRing result={result} />
-          <p className="bmi-category">
+          <p className={classNames("bmi-category")}>
             {result?.category ?? "Enter your measurements"}
           </p>
         </div>
         <div
-          className="unit-control"
+          className={classNames("unit-control")}
           role="group"
           aria-label="Measurement units"
         >
@@ -151,12 +161,12 @@ export function BmiCalculator({
             cm / kg
           </button>
         </div>
-        <div className="bmi-fields">
+        <div className={classNames("bmi-fields")}>
           <fieldset>
             <legend>Height</legend>
-            <div className="height-inputs">
-              <label className="number-field">
-                <span className="sr-only">
+            <div className={classNames("height-inputs")}>
+              <label className={classNames("number-field")}>
+                <span className={classNames("sr-only")}>
                   {unit === "metric"
                     ? "Height in centimeters"
                     : "Height in feet"}
@@ -183,8 +193,10 @@ export function BmiCalculator({
                 <span>{unit === "metric" ? "cm" : "ft"}</span>
               </label>
               {unit === "imperial" && (
-                <label className="number-field">
-                  <span className="sr-only">Additional height in inches</span>
+                <label className={classNames("number-field")}>
+                  <span className={classNames("sr-only")}>
+                    Additional height in inches
+                  </span>
                   <input
                     aria-label="Additional height in inches"
                     type="number"
@@ -202,9 +214,9 @@ export function BmiCalculator({
               )}
             </div>
           </fieldset>
-          <label className="weight-field">
+          <label className={classNames("weight-field")}>
             Weight
-            <span className="number-field">
+            <span className={classNames("number-field")}>
               <input
                 aria-label="Weight"
                 type="number"
@@ -224,11 +236,11 @@ export function BmiCalculator({
             </span>
           </label>
         </div>
-        <fieldset className="bmi-sex">
+        <fieldset className={classNames("bmi-sex")}>
           <legend>Sex</legend>
-          <div className="bmi-sex-options">
+          <div className={classNames("bmi-sex-options")}>
             {(["male", "female"] as const).map((option) => (
-              <label className="bmi-sex-option" key={option}>
+              <label className={classNames("bmi-sex-option")} key={option}>
                 <input
                   type="radio"
                   name={sexGroupName}
@@ -241,25 +253,25 @@ export function BmiCalculator({
             ))}
           </div>
         </fieldset>
-        <div className="bmi-note">
+        <div className={classNames("bmi-note")}>
           For adults. BMI is a screening measure, not a diagnosis.
         </div>
         {error && (
-          <p id="bmi-error" role="alert" className="form-error">
+          <p id="bmi-error" role="alert" className={classNames("form-error")}>
             {error}
           </p>
         )}
-        <Action type="submit" className="bmi-submit">
+        <Action type="submit" className={classNames("bmi-submit")}>
           Calculate BMI
         </Action>
       </form>
-      <div className="bmi-result" aria-live="polite">
+      <div className={classNames("bmi-result")} aria-live="polite">
         <BmiRing result={result} />
-        <p className="bmi-category">
+        <p className={classNames("bmi-category")}>
           {result?.category ?? "Enter your measurements"}
         </p>
-        <div className="bmi-scale" />
-        <div className="bmi-scale-labels">
+        <div className={classNames("bmi-scale")} />
+        <div className={classNames("bmi-scale-labels")}>
           <span>Under 18.5</span>
           <span>18.5-24.9</span>
           <span>25-29.9</span>
@@ -268,7 +280,9 @@ export function BmiCalculator({
         <ActionLink href="#plans" arrow={false}>
           See your GLP-1 options
         </ActionLink>
-        <p className="bmi-note">A physician assesses treatment eligibility.</p>
+        <p className={classNames("bmi-note")}>
+          A physician assesses treatment eligibility.
+        </p>
       </div>
     </section>
   );

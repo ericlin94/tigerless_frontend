@@ -1,5 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { createClassNames } from "@/lib/component-class-names";
+import uiStyles from "@/components/ui/ui.module.css";
+import styles from "./information-page.module.css";
+const classNames = createClassNames({ ...uiStyles, ...styles });
+
 const pages: Record<string, { title: string; body: string }> = {
   terms: {
     title: "Terms & Conditions",
@@ -30,8 +35,8 @@ export default async function InformationPage({
   const page = pages[slug];
   if (!page) notFound();
   return (
-    <main className="information-page">
-      <Link href="/" className="action action-outline">
+    <main className={classNames("information-page")}>
+      <Link href="/" className={classNames("action action-outline")}>
         Back to Apsu
       </Link>
       <h1>{page.title}</h1>

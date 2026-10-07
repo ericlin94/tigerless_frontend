@@ -1,7 +1,10 @@
+import { createClassNames } from "@/lib/component-class-names";
+import styles from "./trust-strip.module.css";
+const classNames = createClassNames(styles);
 export function TrustStrip() {
   return (
     <div
-      className="trust-strip"
+      className={classNames("trust-strip")}
       role="region"
       aria-label="Care benefits"
       tabIndex={0}

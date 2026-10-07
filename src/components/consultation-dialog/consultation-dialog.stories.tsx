@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import { Action } from "../ui/ui";
 import { ConsultationDialog } from "./consultation-dialog";
 import { homeContent } from "@/lib/mock-content";
 const meta = {
@@ -14,8 +15,7 @@ const meta = {
     const [mode, setMode] = useState(args.mode);
     return (
       <>
-        <button
-          className="action action-primary"
+        <Action
           onClick={() =>
             setMode(
               args.mode ?? { kind: "consultation", serviceId: "weight-loss" },
@@ -23,7 +23,7 @@ const meta = {
           }
         >
           Open dialog
-        </button>
+        </Action>
         <ConsultationDialog
           {...args}
           mode={mode}

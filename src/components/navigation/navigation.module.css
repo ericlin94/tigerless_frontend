@@ -1,0 +1,148 @@
+.site-header {
+  height: 60px;
+  padding: 6px 6px 6px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-radius: 9999px;
+  background: var(--page);
+  box-shadow: 0 4px 12px #00000017;
+}
+.brand {
+  width: 287px;
+  max-width: none;
+  height: 32px;
+  object-fit: contain;
+  object-position: left;
+}
+.desktop-nav {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  white-space: nowrap;
+}
+.desktop-nav a {
+  padding: 6px 8px;
+  font-size: 18px;
+  line-height: 1.32;
+  color: #111;
+}
+.desktop-nav a:hover {
+  color: var(--accent);
+  background: #e9f6ee;
+  border-radius: 6px;
+}
+.desktop-actions {
+  display: flex;
+  gap: 16px;
+}
+.menu-trigger {
+  display: none;
+}
+.mobile-menu {
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  background: var(--page);
+  margin: 0;
+  padding: 12px;
+}
+.menu-sheet {
+  background: white;
+  border-radius: 16px;
+  min-height: 100%;
+  padding: 12px 8px;
+}
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding: 0 0 12px 12px;
+}
+.menu-header .brand {
+  width: 287px;
+  max-width: none;
+}
+.menu-header > a {
+  width: 120px;
+  overflow: hidden;
+}
+.menu-header :global(.icon-button) {
+  width: 32px;
+  height: 32px;
+}
+.menu-sheet nav {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 56px;
+}
+.menu-sheet nav a {
+  font-size: 20px;
+  line-height: 1.32;
+  font-weight: 500;
+  padding: 6px 8px;
+}
+.menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 56px;
+}
+@media (max-width: 1250px) and (min-width: 768px) {
+  .site-header > a {
+    width: 120px;
+    overflow: hidden;
+    flex: none;
+  }
+  .desktop-nav {
+    gap: 4px;
+  }
+  .desktop-nav a {
+    font-size: 16px;
+  }
+  .desktop-actions {
+    gap: 8px;
+  }
+  .desktop-actions :global(.action) {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  .site-header {
+    gap: 8px;
+  }
+}
+@media (max-width: 1000px) {
+  .desktop-nav {
+    display: none;
+  }
+  .desktop-actions {
+    display: none;
+  }
+  .menu-trigger {
+    display: flex;
+  }
+  .site-header .brand {
+    width: 287px;
+  }
+  .site-header > a {
+    width: 120px;
+    overflow: hidden;
+    flex: none;
+  }
+}
+@media (max-width: 767px) {
+  .site-header {
+    height: 56px;
+    padding: 8px 12px;
+    background: white;
+    box-shadow: none;
+  }
+  .site-header .brand {
+    width: 287px;
+  }
+}

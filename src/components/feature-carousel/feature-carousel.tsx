@@ -3,6 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Feature } from "@/lib/contracts";
+import { createClassNames } from "@/lib/component-class-names";
+import uiStyles from "../ui/ui.module.css";
+import styles from "./feature-carousel.module.css";
+const classNames = createClassNames({ ...uiStyles, ...styles });
+
 export function FeatureCarousel({
   items,
   initialIndex = 0,
@@ -45,16 +50,19 @@ export function FeatureCarousel({
     });
   }
   return (
-    <section className="feature-section" aria-labelledby="features-title">
-      <div className="feature-heading">
+    <section
+      className={classNames("feature-section")}
+      aria-labelledby="features-title"
+    >
+      <div className={classNames("feature-heading")}>
         <h2 id="features-title">
           Completely online
           <br />
           on your schedule
         </h2>
-        <div className="carousel-controls">
+        <div className={classNames("carousel-controls")}>
           <button
-            className="icon-button"
+            className={classNames("icon-button")}
             aria-label="Previous service"
             title="Previous service"
             disabled={index === 0}
@@ -63,7 +71,7 @@ export function FeatureCarousel({
             <ArrowLeft />
           </button>
           <button
-            className="icon-button"
+            className={classNames("icon-button")}
             aria-label="Next service"
             title="Next service"
             disabled={atEnd}
@@ -74,7 +82,7 @@ export function FeatureCarousel({
         </div>
       </div>
       <div
-        className="feature-track"
+        className={classNames("feature-track")}
         ref={track}
         tabIndex={0}
         aria-label="Online care services"
@@ -92,12 +100,14 @@ export function FeatureCarousel({
       >
         {items.map((item) => (
           <article
-            className={`feature-card feature-${item.presentation}${item.id === "treatment" ? " feature-treatment" : ""}`}
+            className={classNames(
+              `feature-card feature-${item.presentation}${item.id === "treatment" ? " feature-treatment" : ""}`,
+            )}
             key={item.id}
           >
-            <div className="feature-artwork">
+            <div className={classNames("feature-artwork")}>
               <Image
-                className="feature-image"
+                className={classNames("feature-image")}
                 src={item.image.src}
                 alt={item.image.alt}
                 width={
@@ -128,11 +138,11 @@ export function FeatureCarousel({
             </div>
             <h3>{item.title}</h3>
             {item.presentation === "call" && (
-              <div className="chat-preview" aria-hidden="true">
-                <div className="chat-contact">
+              <div className={classNames("chat-preview")} aria-hidden="true">
+                <div className={classNames("chat-contact")}>
                   <img src="/assets/728d1.svg" width={14} height={14} alt="" />
                   <Image
-                    className="chat-avatar"
+                    className={classNames("chat-avatar")}
                     src="/assets/216ba.png"
                     alt=""
                     width={28}
@@ -145,12 +155,12 @@ export function FeatureCarousel({
                   <img src="/assets/5688f.svg" width={14} height={14} alt="" />
                   <img src="/assets/b4fd3.svg" width={14} height={14} alt="" />
                 </div>
-                <div className="chat-today">
+                <div className={classNames("chat-today")}>
                   <img src="/assets/82b61.svg" alt="" />
                   Today
                   <img src="/assets/82b61.svg" alt="" />
                 </div>
-                <div className="chat-message">
+                <div className={classNames("chat-message")}>
                   <Image
                     src="/assets/216ba.png"
                     alt=""
@@ -163,7 +173,7 @@ export function FeatureCarousel({
                     <time>10:00 AM</time>
                   </p>
                 </div>
-                <p className="chat-reply">
+                <p className={classNames("chat-reply")}>
                   I&apos;m feeling fine, thank you! Just want to follow up on my
                   recent tests.<time>10:00 AM</time>
                 </p>
@@ -172,7 +182,7 @@ export function FeatureCarousel({
           </article>
         ))}
       </div>
-      <span className="sr-only" aria-live="polite">
+      <span className={classNames("sr-only")} aria-live="polite">
         Service {index + 1} of {items.length}
       </span>
     </section>
