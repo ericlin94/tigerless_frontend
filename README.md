@@ -84,7 +84,7 @@ BMI accepts canonical centimeters/kilograms; imperial conversion occurs at the f
 
 ## AI Use
 
-Most of the project was completed with AI assistance. There isn’t an easy way to export the full logs in a readable format, but I can walk you through them on a video call if needed.
+Most of the project was completed with AI assistance. There isn’t an easy way to export the full logs in a readable format from Windows ChatGPT(Codex) app, but I can walk you through them on a video call if needed.
 
 ## Production Boundaries
 
